@@ -7,7 +7,7 @@ import * as web3 from "@solana/web3.js";
 const magic = new Magic("pk_test_2C4813383AE9B307", {
   extensions: {
     solana: new SolanaExtension({
-      rpcUrl: "https://devnet.solana.com"
+      rpcUrl: "https://testnet.solana.com"
     })
   }
 });
