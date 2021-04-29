@@ -8,7 +8,9 @@
   ],
   "main": "src/index.js",
   "dependencies": {
-    "@magic-ext/solana": "0.1.0",
+    "@cosmjs/launchpad": "^0.24.1",
+    "@magic-ext/cosmos": "^0.1.0",
+    "@magic-ext/solana": "0.2.0",
     "@solana/web3.js": "0.71.4",
     "bip39": "3.0.2",
     "magic-sdk": "2.4.7",
