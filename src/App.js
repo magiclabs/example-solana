@@ -4,10 +4,12 @@ import { Magic } from "magic-sdk";
 import { SolanaExtension } from "@magic-ext/solana";
 import * as web3 from "@solana/web3.js";
 
+const rpcUrl = 'https://api.devnet.solana.com';
+
 const magic = new Magic("pk_test_2C4813383AE9B307", {
   extensions: {
     solana: new SolanaExtension({
-      rpcUrl: "https://testnet.solana.com"
+      rpcUrl
     })
   }
 });
@@ -63,18 +65,37 @@ export default function App() {
   const handleSignTransaction = async () => {
     setSendingTransaction(true);
     const metadata = await magic.user.getMetadata();
-    const transaction = web3.SystemProgram.transfer({
-      fromPubkey: metadata.publicAddress,
-      toPubkey: destinationAddress,
-      lamports: sendAmount
+    const recipientPubKey = new web3.PublicKey(destinationAddress);
+    const payer = new web3.PublicKey(metadata.publicAddress);
+    const connection = new web3.Connection(rpcUrl);
+
+    const hash = await connection.getRecentBlockhash();
+
+
+    let transactionMagic = new web3.Transaction({
+      feePayer: payer,
+      recentBlockhash: hash.blockhash
     });
 
-    const tx = await magic.solana.signTransaction(transaction);
+    const transaction = web3.SystemProgram.transfer({
+      fromPubkey: payer,
+      toPubkey: recipientPubKey,
+      lamports: sendAmount,
+    });
+
+    transactionMagic.add(...([transaction]));
+
+    const serializeConfig = {
+      requireAllSignatures: false,
+      verifySignatures: true
+    };
+
+    const signedTransaction = await magic.solana.signTransaction(transactionMagic, serializeConfig);
     setSendingTransaction(false);
 
     setTxHash('Check your Signed Transaction in console!');
 
-    console.log("Signed transaction", tx);
+    console.log("Signed transaction", signedTransaction);
   }
 
   return (
