@@ -6,7 +6,7 @@ import * as web3 from "@solana/web3.js";
 
 const rpcUrl = 'https://api.devnet.solana.com';
 
-const magic = new Magic("pk_test_2C4813383AE9B307", {
+const magic = new Magic("pk_live_8350FF5E797D679F", {
   extensions: {
     solana: new SolanaExtension({
       rpcUrl
