@@ -45,23 +45,6 @@ export default function App() {
     setIsLoggedIn(false);
   };
 
-  const handlerSendTransaction = async () => {
-    setSendingTransaction(true);
-    const metadata = await magic.user.getMetadata();
-    const transaction = web3.SystemProgram.transfer({
-      fromPubkey: metadata.publicAddress,
-      toPubkey: destinationAddress,
-      lamports: sendAmount
-    });
-
-    const tx = await magic.solana.sendAndConfirmTransaction(transaction);
-    setSendingTransaction(false);
-
-    setTxHash(tx);
-
-    console.log("send transaction", tx);
-  };
-
   const handleSignTransaction = async () => {
     setSendingTransaction(true);
     const metadata = await magic.user.getMetadata();
@@ -125,10 +108,10 @@ export default function App() {
             <div className="info">{publicAddress}</div>
           </div>
           <div className="container">
-            <h1>Send Transaction</h1>
+            <h1>Sign Transaction</h1>
             {txHash ? (
               <div>
-                <div>Send transaction success</div>
+                <div>Sign transaction success</div>
                 <div className="info">{txHash}</div>
               </div>
             ) : sendingTransaction ? (
@@ -156,9 +139,6 @@ export default function App() {
                 setSendAmount(event.target.value);
               }}
             />
-            <button id="btn-send-txn" onClick={handlerSendTransaction}>
-              Send Transaction
-            </button>
             <button id="btn-send-txn" onClick={handleSignTransaction}>
               Sign Transaction
             </button>

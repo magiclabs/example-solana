@@ -8,19 +8,19 @@
   ],
   "main": "src/index.js",
   "dependencies": {
-    "@cosmjs/launchpad": "^0.24.1",
-    "@magic-ext/cosmos": "^0.1.0",
-    "@magic-ext/solana": "3.1.0",
-    "@solana/web3.js": "^1.31.0",
-    "bip39": "3.0.2",
-    "magic-sdk": "2.4.7",
-    "react": "16.13.1",
-    "react-dom": "16.12.0",
-    "react-scripts": "3.0.1",
+    "@cosmjs/launchpad": "^0.27.1",
+    "@magic-ext/cosmos": "^6.0.0",
+    "@magic-ext/solana": "^7.0.0",
+    "@solana/web3.js": "^1.70.2",
+    "bip39": "^3.0.4",
+    "magic-sdk": "^11.0.0",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0",
+    "react-scripts": "^3.4.4",
     "tweetnacl": "1.0.3"
   },
   "devDependencies": {
-    "typescript": "3.8.3"
+    "typescript": "^4.9.4"
   },
   "scripts": {
     "start": "react-scripts start",
