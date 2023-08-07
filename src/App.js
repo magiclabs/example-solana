@@ -36,7 +36,7 @@ export default function App() {
   }, [isLoggedIn]);
 
   const login = async () => {
-    await magic.auth.loginWithMagicLink({ email });
+    await magic.auth.loginWithEmailOTP({ email });
     setIsLoggedIn(true);
   };
 
@@ -105,7 +105,16 @@ export default function App() {
           </div>
           <div className="container">
             <h1>Solana address</h1>
-            <div className="info">{publicAddress}</div>
+            <div className="info">
+              <a href={`https://explorer.solana.com/address/${publicAddress}?cluster=devnet`} target="_blank" rel="noreferrer">
+                {publicAddress}
+              </a>
+            </div>
+            <button>
+              <a href="https://solfaucet.com/" target="_blank" rel="noreferrer">
+                Faucet
+              </a>
+            </button>
           </div>
           <div className="container">
             <h1>Sign Transaction</h1>
